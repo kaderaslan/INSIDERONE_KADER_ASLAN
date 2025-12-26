@@ -1,5 +1,3 @@
-from selenium.webdriver.support.wait import WebDriverWait
-
 from pages.careers_qa_page import CareersQAPage
 from pages.open_positions_page import OpenPositionsPage
 
@@ -8,17 +6,14 @@ def test_filter_qa_jobs(driver):
     qa_page = CareersQAPage(driver)
     open_positions = OpenPositionsPage(driver)
 
-    # 1. Open QA page
     qa_page.open_qa_page()
 
     assert qa_page.is_qa_page_opened()
     assert qa_page.is_header_visible()
     assert qa_page.is_footer_visible()
 
-    # 2. Go to Open Positions
     qa_page.click_see_all_qa_jobs()
 
-    # 3. Apply location filter
     open_positions.filter_by_department("Quality Assurance")
     open_positions.filter_by_location("Istanbul")
     open_positions.assert_all_jobs_in_location("istanbul")
@@ -39,11 +34,9 @@ def test_view_role_redirects_to_lever_application(driver):
     qa_page = CareersQAPage(driver)
     open_positions = OpenPositionsPage(driver)
 
-    # 1. Open QA careers page
     qa_page.open_qa_page()
     qa_page.click_see_all_qa_jobs()
 
-    # 2. Apply location filter (deterministic)
     open_positions.filter_by_department("Quality Assurance")
     open_positions.filter_by_location("Istanbul")
 
